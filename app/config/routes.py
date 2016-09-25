@@ -1,6 +1,7 @@
 from system.core.router import routes
 
 """
+	  EXAM for pylot
     routes['GET']['/users'] = 'users#index'
     routes['GET']['/users/new'] = 'users#new'
     routes['POST']['/users'] = 'users#create'

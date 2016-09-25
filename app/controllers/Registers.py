@@ -5,12 +5,16 @@ class Registers(Controller):
     super(Registers, self).__init__(action)
     self.load_model('Register')
     self.db = self._app.db
+    #self.clearSession() -- this is how to clear session
 
   def index(self):
     return self.load_view('registration/register.html')
 
   def new(self):
     return self.load_view('registration/register.html')
+
+  def clearSession(self):
+    session.clear()
 
   def add(self):
     userInfo = {}
@@ -24,6 +28,7 @@ class Registers(Controller):
     print "createstatus: {}".format(createStatus)
     if createStatus['status'] == True:
       session['user'] = createStatus['user']
+      print "REGISTER session user: {}".format(session['user'])
     else:
       for message in createStatus['errors']:
         flash(message, 'regis_errors')
@@ -40,7 +45,7 @@ class Registers(Controller):
 
     if loginStatus['status'] == True:
       session['user'] = loginStatus['user']
-
+      print "LOGIN session user: {}".format(session['user'])
     else:
       for message in loginStatus['errors']:
         flash(message, 'regis_errors')

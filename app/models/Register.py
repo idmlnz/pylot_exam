@@ -23,11 +23,15 @@ class Register(Model):
             return {"status": False, "errors": errors}
         else:
             get_user_query = "SELECT * FROM user WHERE email=\"{}\"".format(info['email'])
-            user = self.db.query_db(get_user_query)[0]
-            if (info['password'] == user['password']):
-                return {"status": True, "user": user}
+            user = self.db.query_db(get_user_query)
+            if user:
+                if (info['password'] == user[0]['password']):
+                    return {"status": True, "user": user[0]}
+                else:
+                    errors.append('Your email does not match your password!!')
+                    return {"status": False, "errors": errors}
             else:
-                errors.append('Your email does not match your password!!')
+                errors.append('Your email does not exists.  Create one!!')
                 return {"status": False, "errors": errors}
 
     def createUser(self, info):

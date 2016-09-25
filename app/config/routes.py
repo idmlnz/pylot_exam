@@ -14,5 +14,6 @@ from system.core.router import routes
 routes['default_controller'] = 'Registers'
 
 routes['GET']['/registers/new'] = 'Registers#new'
+routes['GET']['/registers/clearsession'] = 'Registers#clearSession'
 routes['POST']['/registers/add'] = 'Registers#add'
 routes['POST']['/registers/login'] = 'Registers#login'

@@ -22,18 +22,22 @@ class Registers(Controller):
     userInfo['email'] = request.form['email']
     userInfo['password'] = request.form['password']
     userInfo['confirm_password'] = request.form['confirm_password']
+    userInfo['birthday'] = request.form['birthday']
 
     createStatus = self.models['Register'].createUser(userInfo)
     print "createstatus: {}".format(createStatus)
     if createStatus['status'] == True:
-      session['user'] = createStatus['user']
-      print "REGISTER session user: {}".format(session['user'])
+      session['users'] = createStatus['users']
+      print "REGISTER session users: {}".format(session['users'])
     else:
       for message in createStatus['errors']:
         flash(message, 'regis_errors')
       return self.load_view('registration/register.html', error=createStatus['errors'], mesg_origin="register")
 
-    return redirect('/')  # redirect to / FOR NOW
+    return redirect("users/friendship/{}".format(createStatus['users']['id']))
+
+  def home(self):
+    return redirect("users/friendship/{}".format(session['users']['id']))
 
   def login(self):
     userInfo = {}
@@ -43,14 +47,15 @@ class Registers(Controller):
     loginStatus = self.models['Register'].checkUser(userInfo)
 
     if loginStatus['status'] == True:
-      session['user'] = loginStatus['user']
-      print "\nLOGIN session user: {}\n".format(session['user'])
+      session['users'] = loginStatus['users']
+      print "\nLOGIN session users: {}\n".format(session['users'])
     else:
       for message in loginStatus['errors']:
         flash(message, 'regis_errors')
       return self.load_view('registration/register.html', error=loginStatus['errors'], mesg_origin="login")
 
-    return redirect('/')  # redirect to / FOR NOW
+    print "\nXXX LOGIN session users: {}\n".format(session['users'])
+    return redirect("users/friendship/{}".format(loginStatus['users']['id']))
 
   def logout(self):
     self.clearSession()

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Restful Friendship - User Page  </title>
+  <meta name="description" content="Friendship App">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  <style>
+    .label {
+      margin-top: -8px;
+    }
+    .bodycontainer {
+      max-height: 400px;
+      width: 100%;
+      margin: 0;
+      overflow-y: auto;
+    }
+    .table-scrollable {
+      margin: 0;
+      padding: 0;
+    }
+    .action{
+      padding-right:5px;
+    }
+    .bare {
+      border: 0;
+      background:none;
+      color:blue
+    }
+    .action {
+      display:inline;
+    }
+
+  </style>
+
+
+</head>
+<body>
+
+  <!-- Friendship page heading -->
+  <div class="jumbotron">
+   <div class="container">
+      <p>Friendship page </p>
+   </div>
+  </div><!-- End Friendship heading -->
+
+  <div class="container">
+    <div class="row">
+      <div class="well col-sm-10 col-sm-offset-1 well-margin" style="margin-top: 10px">
+
+          <!-- Friendship table -->
+          <div class="table-responsive">
+              <table class="table table-striped table-hover table-condensed">
+                  <thead>
+                      <tr>
+                          <th width="25%">Alias </th>
+                          <th width="35%">Action</th>
+                      </tr>
+                  </thead>
+              </table>
+
+              <div class="bodycontainer scrollable">
+                <table id="friendship" class="table table-bordered table-hover table-striped table-condensed table-scrollable">
+
+                  <tbody>
+                    {% for friend in friends %}
+                        <tr>
+                          <td width="25%">{{ friend['friend_firstname'] }}</td>
+                          <td  width="25%"class="text-center">
+                              <form action="/users/doAction/{{ friend['friend_email'] }}" method="post">
+                                    <u><input type="submit" class="bare center-block action" name="action" value="View Profile"></u>
+                                    <u><input type="submit" class="bare center-block action" name="action" value="Remove as Friend"></u>
+                              </form>
+                          </td>
+                        </tr>
+                    {% endfor %}
+                  </tbody>
+
+                </table>
+              </div>
+          </div> <!-- End product -->
+
+
+      </div> <!-- End well -->
+    </div> <!-- End class row -->
+
+        <div class="row">
+      <div class="well col-sm-10 col-sm-offset-1 well-margin" style="margin-top: 10px">
+
+          <!-- Friendship table -->
+          <div class="table-responsive">
+              <table class="table table-striped table-hover table-condensed">
+                  <thead>
+                      <tr>
+                          <th width="25%">Alias </th>
+                          <th width="35%">Action</th>
+                      </tr>
+                  </thead>
+              </table>
+
+              <div class="bodycontainer scrollable">
+                <table id="friend" class="table table-bordered table-hover table-striped table-condensed table-scrollable">
+
+                  <tbody>
+                    {% for friend in notfriends %}
+                        <tr>
+                          <td width="25%">
+                            <u><a href="/users/doaction={{friend['email']}}" class="bare center-block action" value="{{friend['friend']}}"></a>{{friend['firstname']}}</u>
+                          </td>
+                          <td  width="25%"class="text-center">
+                              <form action="/users/doAction/{{ friend['id'] }}" method="post">
+                                    <u><input type="submit" class="bare center-block action" name="action" value="Add as Friend"></u>
+                              </form>
+                          </td>
+                        </tr>
+                    {% endfor %}
+                  </tbody>
+
+                </table>
+              </div>
+          </div> <!-- End product -->
+
+
+      </div> <!-- End well -->
+    </div> <!-- End class row -->
+
+  </div> <!-- End container -->
+
+  <!--
+  <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+  -->
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>

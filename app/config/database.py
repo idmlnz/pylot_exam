@@ -14,7 +14,7 @@ class DBConfig(object):
 class DevelopmentDBConfig(DBConfig):
     DB_USERNAME = 'root'
     DB_PASSWORD = 'root'
-    DB_DATABASE_NAME = 'examdb'
+    DB_DATABASE_NAME = 'friendship'
     DB_HOST = 'localhost'
     DB_PORT = 3306
     # """ unix_socket is used for connecting with MAMP. Take this out if you aren't using MAMP """

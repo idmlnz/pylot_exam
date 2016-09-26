@@ -31,10 +31,10 @@ class Welcome(Controller):
         
         self.models['WelcomeModel'].add_message()
         # messages = self.models['WelcomeModel'].grab_messages()
-        # user = self.models['WelcomeModel'].get_user()
+        # users = self.models['WelcomeModel'].get_user()
         # to pass information on to a view it's the same as it was with Flask
         
-        # return self.load_view('index.html', messages=messages, user=user)
+        # return self.load_view('index.html', messages=messages, users=users)
         """
         return self.load_view('index.html')
 

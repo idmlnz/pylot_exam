@@ -22,11 +22,11 @@ class Register(Model):
         if errors:
             return {"status": False, "errors": errors}
         else:
-            get_user_query = "SELECT * FROM user WHERE email=\"{}\"".format(info['email'])
+            get_user_query = "SELECT * FROM users WHERE email=\"{}\"".format(info['email'])
             user = self.db.query_db(get_user_query)
             if user:
                 if (info['password'] == user[0]['password']):
-                    return {"status": True, "user": user[0]}
+                    return {"status": True, "users": user[0]}
                 else:
                     errors.append('Your email does not match your password!!')
                     return {"status": False, "errors": errors}
@@ -65,24 +65,24 @@ class Register(Model):
             return {"status": False, "errors": errors}
 
         else:
-            # add user to DB
+            # add users to DB
             #pw_hash = bcrypt.generate_password_hash(info['password'])
             pw_hash = info['password']
 
-            #check if user already exists
-            get_user_query = "SELECT * FROM user where email=\"{}\"".format(info['email'])
+            #check if users already exists
+            get_user_query = "SELECT * FROM users where email=\"{}\"".format(info['email'])
             print "query: {}".format(get_user_query)
             try:
                 user = self.db.query_db(get_user_query)
-                print "user: {}".format(user)
+                print "users: {}".format(user)
                 if user:
                     errors.append("{} already exists! Try login-in".format(info['email']))
                     return {"status": False, "errors": errors}
             except:
               pass
 
-            insertQuery = "INSERT INTO user (firstname, lastname, email, password, created_at, updated_at) \
-                VALUES (:firstname, :lastname, :email, :password, NOW(), NOW())"
+            insertQuery = "INSERT INTO users (firstname, lastname, email, password, birthday, created_at, updated_at) \
+                VALUES (:firstname, :lastname, :email, :password, NOW(), NOW(), NOW())"
 
             userData = {
                 'firstname': info['firstname'],
@@ -91,9 +91,10 @@ class Register(Model):
                 'password': pw_hash
             }
             print "userdata: {}".format(userData)
+            print "INSERT: {}\n".format(insertQuery)
             self.db.query_db(insertQuery, userData)
 
-            get_user_query = "SELECT * FROM user ORDER BY id DESC LIMIT 1"
+            get_user_query = "SELECT * FROM users ORDER BY id DESC LIMIT 1"
             user = self.db.query_db(get_user_query)
-            return {"status": True, "user": user[0]}
+            return {"status": True, "users": user[0]}
 

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <title>Restful Users -  display user page</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Restful Users">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <style>
+      .action{
+        padding-right:5px
+      }
+      u {
+        padding-right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- Add users page  heading -->
+    <div class="jumbotron">
+     <div class="container">
+        <p>Display user </p>
+     </div>
+    </div><!-- End Add users page heading -->
+
+    <div class="container">
+      <div class="row well col-sm-10 col-sm-offset-1" style="margin-top: 10px">
+                      <div class="row">
+            <div class="col-sm-10 col-sm-offset-9">
+              <u><a href="/registers/home"><strong><u class="action">Home</u></strong></a></u>
+              |&nbsp;&nbsp;&nbsp;
+              <u><a href="/registers/logout"><strong><u class="logout">Logout</u></strong></a> </u>
+            </div>
+          </div>
+            <!-- display email -->
+                <div class="row">
+                  <div class="col-sm-10 col-sm-offset-1">
+                    <h4 id="valid">{{ user['firstname'] }} Profile </h4>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-10 col-sm-offset-1">
+                    <h5><u>Full Name:</u> {{ user['firstname'] ~ " " ~ user['lastname'] }}</h5>
+                    <h5><u>Email:</u> {{ user['email'] }}</h5>
+                  </div>
+                </div>
+
+
+       </div>  <!-- End well -->
+    </div> <!-- End container row -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -16,6 +16,7 @@ routes['default_controller'] = 'Registers'
 routes['GET']['/users/friendship/<id>'] = 'Users#friendship'
 routes['GET']['/users/notfriends'] = 'Users#notfriends'
 routes['POST']['/users/doAction/<email>'] = 'Users#doAction'
+routes['POST']['/users/show/<email>'] = 'Users#show'
 
 
 

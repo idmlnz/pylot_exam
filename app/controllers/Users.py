@@ -50,11 +50,18 @@ class Users(Controller):
     product = self.models['Product'].deleteProductById(productId)
     return redirect('/products/display')
 
+  def show(self, email):
+    return self.displayUserView(email)
+
   def doAction(self, email):
     print "FRIEND email: {}".format(email)
     action = request.form['action']
     if (action == 'View Profile'):
       return self.displayUserView(email)
+
+    if (action == 'Add as  Friend'):
+      pass
+      #return self.displayUserView(email)
 
     if (action == 'Remove as Friend'):
       return self.delete(email)

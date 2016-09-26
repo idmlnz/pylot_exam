@@ -107,7 +107,7 @@
                     {% for friend in notfriends %}
                         <tr>
                           <td width="25%">
-                            <u><a href="/users/doaction={{friend['email']}}" class="bare center-block action" value="{{friend['friend']}}">{{friend['firstname']}}</a></u>
+                            <u><a href="/users/show/{{friend['email']}}" class="bare center-block action" value="{{friend['friend']}}">{{friend['firstname']}}</a></u>
                           </td>
                           <td  width="25%"class="text-center">
                               <form action="/users/doAction/{{ friend['id'] }}" method="post">

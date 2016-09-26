@@ -5,7 +5,6 @@ class Registers(Controller):
     super(Registers, self).__init__(action)
     self.load_model('Register')
     self.db = self._app.db
-    #self.clearSession() -- this is how to clear session
 
   def index(self):
     return self.load_view('registration/register.html')
@@ -45,7 +44,7 @@ class Registers(Controller):
 
     if loginStatus['status'] == True:
       session['user'] = loginStatus['user']
-      print "LOGIN session user: {}".format(session['user'])
+      print "\nLOGIN session user: {}\n".format(session['user'])
     else:
       for message in loginStatus['errors']:
         flash(message, 'regis_errors')
@@ -53,3 +52,7 @@ class Registers(Controller):
 
     return redirect('/')  # redirect to / FOR NOW
 
+  def logout(self):
+    self.clearSession()
+    print "\nSESSION is cleared on LOGOUT\n"
+    return redirect('/')  # redirect to / FOR NOW
